@@ -16,6 +16,8 @@ import android.widget.Button;
 
 import com.fastcnt.fpad.ui.ProgressWheel;
 
+import java.util.Random;
+
 public class FullActivity extends ActionBarActivity implements View.OnClickListener {
     boolean wheelRunning;
     int wheelProgress = 0;
@@ -49,8 +51,15 @@ public class FullActivity extends ActionBarActivity implements View.OnClickListe
         public void run() {
             wheelRunning = true;
             while (wheelProgress < 361) {
-                pwTwo.incrementProgress();
-                wheelProgress+=1.8;
+                Random random = new Random();
+                int temp = random.nextInt(10);
+                if(wheelProgress+temp>=360){
+                    pwTwo.incrementProgress(360-wheelProgress);
+                    wheelProgress=361;
+                }else{
+                    pwTwo.incrementProgress(temp);
+                }
+                wheelProgress+=temp;
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {

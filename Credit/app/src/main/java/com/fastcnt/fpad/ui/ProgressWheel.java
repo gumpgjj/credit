@@ -272,9 +272,9 @@ public class ProgressWheel extends View {
 	/**
 	 * Increment the progress by 1 (of 360)
 	 */
-	public void incrementProgress() {
+	public void incrementProgress(int process) {
 		isSpinning = false;
-		progress++;
+		progress+=process;
 		setText(Math.round(((float) progress / 360) * 100) + "%");
 		spinHandler.sendEmptyMessage(0);
 	}
