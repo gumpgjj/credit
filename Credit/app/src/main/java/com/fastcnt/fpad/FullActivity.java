@@ -14,8 +14,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class FullActivity extends ActionBarActivity implements View.OnClickListener {
+import com.fastcnt.fpad.ui.ProgressWheel;
 
+public class FullActivity extends ActionBarActivity implements View.OnClickListener {
+    boolean wheelRunning;
+    int wheelProgress = 0;
+    private ProgressWheel pwTwo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +32,34 @@ public class FullActivity extends ActionBarActivity implements View.OnClickListe
         findViewById(R.id.bind_service).setOnClickListener(this);
         findViewById(R.id.unbind_service).setOnClickListener(this);
         Log.d("MyService", "MainActivity thread id is " + Thread.currentThread().getId());
+        Button startBtn = (Button) findViewById(R.id.start_load);
+        pwTwo = (ProgressWheel) findViewById(R.id.progress_bar_two);
+        new Thread(r).start();
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                /*if (!wheelRunning) {*/
+                    wheelProgress = 0;
+                    pwTwo.resetCount();
+                    new Thread(r).start();
+                /*}*/
+            }
+        });
     }
+    final Runnable r = new Runnable() {
+        public void run() {
+            wheelRunning = true;
+            while (wheelProgress < 361) {
+                pwTwo.incrementProgress();
+                wheelProgress+=1.8;
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            wheelRunning = false;
+        }
+    };
 
     private ServiceConnection connection = new ServiceConnection() {
 
