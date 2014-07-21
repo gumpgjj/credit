@@ -21,8 +21,14 @@
         <activity
             android:name=".FullActivity"
             android:label="@string/title_activity_full_activiy"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.AppCompat" >
         </activity>
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
