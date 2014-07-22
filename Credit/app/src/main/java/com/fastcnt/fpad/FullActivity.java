@@ -18,7 +18,7 @@ import com.fastcnt.fpad.ui.ProgressWheel;
 
 import java.util.Random;
 
-public class FullActivity extends ActionBarActivity implements View.OnClickListener {
+public class FullActivity extends ActionBarActivity implements View.OnClickListener,ItemFragment.OnFragmentInteractionListener {
     boolean wheelRunning;
     int wheelProgress = 0;
     private ProgressWheel pwTwo;
@@ -126,5 +126,10 @@ public class FullActivity extends ActionBarActivity implements View.OnClickListe
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+        Log.e("","=============="+id);
     }
 }

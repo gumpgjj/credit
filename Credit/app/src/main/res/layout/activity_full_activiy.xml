@@ -77,4 +77,13 @@
         android:layout_toLeftOf="@+id/stopService"
         android:layout_toStartOf="@+id/stopService" />
 
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.fastcnt.fpad.ItemFragment"
+        android:id="@+id/show_fragment"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/start_load"
+        android:layout_alignEnd="@+id/start_load" />
+
 </RelativeLayout>
