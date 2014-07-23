@@ -30,10 +30,10 @@
             android:name=".MyActivity"
             android:label="@string/title_activity_my"
             />
-        <activity android:name=".products.MainActivity">
+        <activity android:name=".products.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

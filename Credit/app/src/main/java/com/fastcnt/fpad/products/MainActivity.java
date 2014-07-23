@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	 */
 	private SettingFragment settingFragment;
 
+    private MoneyFragment moneyFragment;
 	/**
 	 * 消息界面布局
 	 */
@@ -59,6 +60,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * 设置界面布局
 	 */
 	private View settingLayout;
+    /**
+	 * 资金界面布局
+	 */
+	private View moneyLayout;
 
 	/**
 	 * 在Tab布局上显示消息图标的控件
@@ -100,6 +105,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	 */
 	private TextView settingText;
 
+    private  TextView moneyText;
+
 	/**
 	 * 用于对Fragment进行管理
 	 */
@@ -125,6 +132,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		contactsLayout = findViewById(R.id.contacts_layout);
 		newsLayout = findViewById(R.id.news_layout);
 		settingLayout = findViewById(R.id.setting_layout);
+        moneyLayout= findViewById(R.id.money_layout);
 		messageImage = (ImageView) findViewById(R.id.message_image);
 		contactsImage = (ImageView) findViewById(R.id.contacts_image);
 		newsImage = (ImageView) findViewById(R.id.news_image);
@@ -133,10 +141,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		contactsText = (TextView) findViewById(R.id.contacts_text);
 		newsText = (TextView) findViewById(R.id.news_text);
 		settingText = (TextView) findViewById(R.id.setting_text);
+        moneyText=(TextView)findViewById(R.id.money_text);
 		messageLayout.setOnClickListener(this);
 		contactsLayout.setOnClickListener(this);
 		newsLayout.setOnClickListener(this);
 		settingLayout.setOnClickListener(this);
+        moneyLayout.setOnClickListener(this);
 	}
 
 	@Override
@@ -158,6 +168,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			// 当点击了设置tab时，选中第4个tab
 			setTabSelection(3);
 			break;
+        case R.id.money_layout:
+            setTabSelection(4);
+            break;
 		default:
 			break;
 		}
@@ -180,7 +193,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 0:
 			// 当点击了消息tab时，改变控件的图片和文字颜色
 			messageImage.setImageResource(R.drawable.message_selected);
-			messageText.setTextColor(Color.WHITE);
+			messageText.setTextColor(Color.RED);
 			if (messageFragment == null) {
 				// 如果MessageFragment为空，则创建一个并添加到界面上
 				messageFragment = new MessageFragment();
@@ -193,7 +206,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 1:
 			// 当点击了联系人tab时，改变控件的图片和文字颜色
 			contactsImage.setImageResource(R.drawable.contacts_selected);
-			contactsText.setTextColor(Color.WHITE);
+			contactsText.setTextColor(Color.RED);
 			if (contactsFragment == null) {
 				// 如果ContactsFragment为空，则创建一个并添加到界面上
 				contactsFragment = new ContactsFragment();
@@ -206,7 +219,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 2:
 			// 当点击了动态tab时，改变控件的图片和文字颜色
 			newsImage.setImageResource(R.drawable.news_selected);
-			newsText.setTextColor(Color.WHITE);
+			newsText.setTextColor(Color.RED);
 			if (newsFragment == null) {
 				// 如果NewsFragment为空，则创建一个并添加到界面上
 				newsFragment = new NewsFragment();
@@ -217,10 +230,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case 3:
-		default:
 			// 当点击了设置tab时，改变控件的图片和文字颜色
 			settingImage.setImageResource(R.drawable.setting_selected);
-			settingText.setTextColor(Color.WHITE);
+			settingText.setTextColor(Color.RED);
 			if (settingFragment == null) {
 				// 如果SettingFragment为空，则创建一个并添加到界面上
 				settingFragment = new SettingFragment();
@@ -230,7 +242,19 @@ public class MainActivity extends Activity implements OnClickListener {
 				transaction.show(settingFragment);
 			}
 			break;
-		}
+        case 4:
+        default:
+            moneyText.setTextColor(Color.RED);
+            if (moneyFragment == null) {
+                // 如果SettingFragment为空，则创建一个并添加到界面上
+                moneyFragment = new MoneyFragment();
+                transaction.add(R.id.content, moneyFragment);
+            } else {
+                // 如果SettingFragment不为空，则直接将它显示出来
+                transaction.show(moneyFragment);
+            }
+        break;
+        }
 		transaction.commit();
 	}
 
@@ -246,6 +270,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		newsText.setTextColor(Color.parseColor("#82858b"));
 		settingImage.setImageResource(R.drawable.setting_unselected);
 		settingText.setTextColor(Color.parseColor("#82858b"));
+        moneyText.setTextColor(Color.parseColor("#82858b"));
 	}
 
 	/**
@@ -266,6 +291,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 		if (settingFragment != null) {
 			transaction.hide(settingFragment);
+		}if (moneyFragment != null) {
+			transaction.hide(moneyFragment);
 		}
 	}
 }
